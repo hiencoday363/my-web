@@ -1,13 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {map} from 'rxjs/operators';
 
-@Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
-})
-
-
-export class HomeComponent implements OnInit {
+@Injectable()
+export class DataStoreService {
   path = 'assets/images/img-skill/';
   skills: any[] = [
     {
@@ -91,7 +87,6 @@ export class HomeComponent implements OnInit {
       url: 'tensorflow.png'
     },
   ];
-
   project: any[] = [
     {
       url: 'assets/images/img_project/amazon-clone.PNG',
@@ -110,7 +105,7 @@ export class HomeComponent implements OnInit {
     {
       url: 'assets/images/img_project/img-django-web.PNG',
       git: 'https://github.com/hiencoday363/django_web_01',
-      link_demo: null,
+      link_demo: 'https://learn-web-django01.herokuapp.com/',
       title: 'WEBSITE USE DJANGO PYTHON',
       use: 'Django, Postgre, ...'
     },
@@ -122,11 +117,28 @@ export class HomeComponent implements OnInit {
       use: 'Nodejs, SQL server, ...'
     },
   ];
+  baseurl = 'http://localhost:5000/';
 
-  constructor() {
+  constructor(private http: HttpClient) {
   }
 
-  ngOnInit(): void {
+  fetch_data(endpoint){
+    this.http.get(this.baseurl + endpoint)
+      .subscribe((data: []) => {
+        console.log(typeof data);
+        return data;
+      });
   }
 
+  get_path() {
+    return this.path;
+  }
+
+  get_skills() {
+    return this.skills;
+  }
+
+  get_projects() {
+    return this.project;
+  }
 }

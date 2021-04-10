@@ -76,7 +76,7 @@ p {
   padding: 0;
   font-size: 15px;
   color: #999999;
-  line-height: 28px;
+  line-height: 1.3em;
 }
 
 ::-moz-selection {

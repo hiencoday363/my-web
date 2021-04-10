@@ -10,6 +10,7 @@
 # dependencies
 /node_modules
 /src/lib
+../venv
 
 # profiling files
 chrome-profiler-events*.json
